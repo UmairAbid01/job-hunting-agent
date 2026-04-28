@@ -1,0 +1,46 @@
+Muhammad Umair Abid 
+ AI ENGINEER 
+                             Email: umairabid8881@gmail.com  | LinkedIn: www.linkedin.com/in/umair8881                              
+                                               Phone: +92 317 8408881 | Address: Faisalabad, Pakistan 
+Professional Summary: 
+ AI Engineer with hands-on experience in Machine Learning, Deep Learning,  LLMs ,CV , NLP using 
+Python, HTML/CSS. 
+ 
+Education:  
+       BS in  Artificial Intelligence (2022-2026) - FAST CFD Campus, Pakistan 
+● Major Courses: Machine Learning, Artificial Neural Networks, Natural Language Processing, 
+Computer Vision, MLOps, Knowledge Representation and Reasoning. 
+ 
+Skills: 
+● Programming Languages: Python, C/C++ 
+● Framework/Libraries: Transformers (language/vision), Pytorch, Tensorflow, OpenCV, Git, RAG, 
+LLMs, Scikit-Learn, Knowledge Graphs, GraphDB, Neo4j, Hugging Face 
+● Operating Systems: Linux/Windows 
+● Database: SQL, Oracle 
+● Additional Skills: Team Leadership, Interpersonal Skills, Communication, Collaboration 
+ 
+Projects: 
+● Physician Assistant (AI Healthcare Platform) 
+● Fine-tuned an LLM on medical dialogues for symptom extraction, clinical summaries, and 
+disease prediction; integrated STT/TTS, multilingual NLP, doctor recommendations, 
+scheduling, prescription validation, and AI-driven follow-up. 
+● Food Image Classification 
+● Applied transfer learning on EfficientNetB3, ResNet101, and DenseNet201 using ImageNet 
+weights to classify 101 food categories, with DenseNet201 achieving ~69.3% test accuracy 
+through dense feature reuse. 
+● Multimodal Cancer Outcome Prediction & Phishing Detection 
+● Built unimodal and multimodal deep learning models integrating clinical, imaging, and 
+genomic data (TCGA, TCIA, LIDC) with SHAP/LIME for cancer outcome prediction; 
+implemented zero-shot and fine-tuned transformers (BART, T5, XLM-R) for phishing 
+detection, evaluated via accuracy, precision, recall, and F1-score. 
+● End-to-End MLOps Pipeline  
+● Built an end-to-end MLOps pipeline using Git, DVC, GitHub Actions (CI/CD), Docker, and Airflow 
+for data versioning and automated training. Deployed a containerized FastAPI inference service on 
+AWS EC2 with S3 storage, exposing a public endpoint and validating via logs and tests. 
+● Personalized Travel Recommender System 
+● Fine-tuned an LLM on travel data with user feedback, integrating LSH and Faiss for retrieval 
+and GPT-based re-ranking for personalized recommendations.  
+ 
+Leadership:  
+President – Goonj Society (2024–2025, FAST NUCES CFD). Led the Islamic student society in 
+organizing events like seminars on Seerah, ethics workshops, and blood donation drives. 

@@ -1,0 +1,544 @@
+Module 1 — Custom GPTs Fundamentals
+
+Prompts as “Programming” (from-now-on instructions, default behavior control)
+Tone control and behavior programming (e.g., excited/formal/neutral)
+Programming with background knowledge (user/org context injection)
+Custom Instructions vs. in-chat instructions (persistence, “won’t forget” behavior)
+Guardrails via instructions (preventing easy user override, risks of bypass attempts)
+Retrieval Augmented Generation (RAG) concept (retrieve → augment prompt → generate)
+Using “only the information provided” vs. mixing external knowledge (source preference)
+What a Custom GPT is (instructions + extra knowledge + skills)
+GPT configuration components: Name, Description, Instructions, Conversation Starters, Knowledge
+Knowledge uploads as a source for RAG (files as knowledge base)
+Tools/Capabilities in Custom GPTs (Web browsing, Image generation, Code Interpreter, Actions)
+Actions as tool interfaces (name/description/usage format, when to call)
+Tool description importance + tool grammar/structure (simulation of tool calls)
+Risks of enabling unnecessary capabilities (added reasoning complexity)
+Module 1 — Conversation Customization Patterns
+
+CAPITAL framework for conversation tuning:
+Confidence
+Amicability
+Professionalism
+Interactivity
+Transparency
+Adaptability
+Lexicography
+Persona Pattern for Custom GPTs (persona-driven reasoning + tone shifts)Persona-driven tradeoffs (conservative vs. “least red tape” behaviors)Prompt Patterns concept (fundamental contextual statements)Persona Pattern format (Act as X, perform task Y)
+
+
+
+Module 2 — Testing & Quality of Custom GPTs
+
+Why benchmarking matters (regression prevention, objective improvement tracking)
+Building a benchmark table (prompt, expected output, rubric, scoring scale)
+Rubrics for qualitative outputs (human grading and structured criteria)
+Benchmark coverage strategy (expected use cases + edge cases)
+Benchmark design considerations:
+task types, user profiles, input complexity, emotional tone, adversarial inputs
+conversational quality across turns (coherence, continuity, responsiveness, error recovery)
+Using a Custom GPT to generate test cases (test-case generator GPT idea)
+
+
+Module 2 — Helping Humans Think (Not Just Answering)
+
+“Augmented intelligence” goal (support human reasoning, avoid replacing it)
+Citing knowledge with direct quotations (traceability + user verification)
+Fact-first responses vs. answer-first responses (prevent user “checking out”)
+Output formatting control with Template Pattern (structured answers)
+Markdown basics for structure (headings, placeholders)
+Hedging and ambiguity handling (multiple interpretations, decision support)
+Escalation path / human support suggestion when ambiguous or high-stakes
+
+
+Prompt Patterns (Modules 3–6)
+
+A 3‑hour, FYP‑oriented story for BSAI seniors
+
+Prompt Engineering for
+ChatGPT
+
+Goal: turn prompt patterns into repeatable engineering moves you can apply in your
+FYP.
+
+We will use 3 running examples: (1) RAG policy assistant, (2) FYP supervisor helper,
+(3) evaluation/benchmark bot.
+
+Class style: short concept → technical example → mini‑task (you try).
+
+Instructor note
+
+Encourage students to keep one shared “Prompt Lab” doc where they paste prompts + results + what changed.
+
+Roadmap for Today
+
+Story Arc
+
+Module 3: Prompt Patterns I — refine questions, verify thinking, tailor to audience, flipped
+interaction.
+
+Module 4: Few‑shot & reasoning — few‑shot for tasks, intermediate steps, CoT, ReAct,
+LLM‑as‑grader.
+
+Module 5: Prompt Patterns II — gameplay, template, meta‑language, recipe, alternative
+approaches.
+
+Module 6: Prompt Patterns III — ask‑for‑input, combine patterns, outline expansion, menu
+actions, fact checklist, tail, semantic filter.
+
+Wrap‑up: how to choose patterns for your FYP pipeline (RAG, agent loop, evaluation).
+
+Question Refinement Pattern
+
+Module 3
+
+Why it exists:
+
+You ask a vague question; the model proposes a *better*
+question that adds missing constraints/context, then asks if
+you want to use it.
+
+Core move:
+
+• Always propose a refined version
+
+• Offer a yes/no switch to use refined vs original
+
+• Helps you notice missing constraints
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Question Refinement Pattern — Technical Example
+
+Module 3
+
+Example prompt (copy/paste)
+
+From now on, whenever I ask a question:
+
+1) Suggest a better version of my question that adds
+missing constraints (data, scope, success metric).
+
+2) Ask: “Use the better question? (Yes/No)”.
+
+If I say Yes, answer the better question. If No, answer
+my original question.
+
+My first question: “How can I improve my FYP?”
+
+Sample output (what “good” looks like)
+
+Suggested question adds: domain, dataset, objective
+metric, latency/budget constraints, and current baseline.
+
+Then model asks: “Use better question?
+(Yes/No)”
+
+Mini‑task (do in class)
+
+Pick your own FYP topic. Write a 1‑line vague question.
+
+Run the pattern and compare the refined
+question with your original.
+
+Record: which constraint changed the
+answer the most?
+
+Cognitive Verifier Pattern
+
+Module 3
+
+Why it exists:
+
+LLMs often do better when they first generate sub‑questions
+that expose missing variables and then combine answers.
+
+Core move:
+
+• Generate N clarifying sub‑questions
+
+• Answer each (using user inputs if needed)
+
+• Synthesize final answer
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Cognitive Verifier Pattern — Technical Example
+
+Module 3
+
+Example prompt (copy/paste)
+
+When you are asked a question, follow these rules:
+
+- Generate 5 additional questions that would help more
+accurately answer it.
+
+- Ask me to answer them (one at a time).
+
+- Combine the answers to produce the final response.
+
+Question: “Estimate the cost + latency of adding RAG to
+our FYP chatbot.”
+
+Sample output (what “good” looks like)
+
+Outputs 5 sub‑questions: corpus size, embedding model,
+vector DB choice, query QPS, target latency.
+
+After answers, provides a cost/latency
+estimate with assumptions.
+
+Mini‑task (do in class)
+
+Use your FYP. Ask a hard planning question (compute,
+cost, timeline).
+
+Answer the 5 sub‑questions.
+
+Check if final plan changed vs your first
+intuition.
+
+Audience Persona Pattern
+
+Module 3
+
+Why it exists:
+
+Instead of changing the assistant persona, you change the
+*audience persona* so the explanation matches the reader
+(HoD, client, junior dev, etc.).
+
+Core move:
+
+• State: “Explain X to me.”
+
+• State: “Assume I am Persona Y.”
+
+• Model adapts vocabulary + depth + examples
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Audience Persona Pattern — Technical Example
+
+Module 3
+
+Example prompt (copy/paste)
+
+Explain retrieval‑augmented generation (RAG) to me.
+
+Assume I am a final‑year BSAI student building a capstone
+chatbot and I care about:
+
+- evaluation metrics (EM/F1, faithfulness)
+
+- failure modes (hallucinations)
+
+- deployment constraints (latency, cost)
+
+Sample output (what “good” looks like)
+
+Explains RAG with: index→retrieve→ground→generate
+pipeline; metrics; common bugs; and a deployment
+checklist.
+
+Mini‑task (do in class)
+
+Rewrite Persona Y for 3 audiences:
+
+(1) Non‑technical client, (2) security
+reviewer, (3) your supervisor.
+
+Compare how the explanation changes.
+
+Flipped Interaction Pattern
+
+Module 3
+
+Why it exists:
+
+You want the model to drive the Q/A loop: it asks questions
+until it has enough info to produce a plan/design/output.
+
+Core move:
+
+• Tell it the goal X
+
+• Tell it the stopping condition Y
+
+• Ask for first question; optionally one‑at‑a‑time
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Flipped Interaction Pattern — Technical Example
+
+Module 3
+
+Example prompt (copy/paste)
+
+I would like you to ask me questions to help me design my
+FYP chatbot architecture.
+
+Ask questions until you have enough information to:
+
+(1) propose a baseline architecture, and
+
+(2) propose an evaluation plan.
+
+Ask one question at a time. Ask me the first question.
+
+Sample output (what “good” looks like)
+
+Starts with: “What is the user + task?” then asks
+data/privacy/tooling questions.
+
+Stops with a 1‑page architecture + eval
+plan.
+
+Mini‑task (do in class)
+
+Run this for your FYP. Do not answer with
+essays—answer with short facts.
+
+Goal: reach a complete architecture in <10
+turns.
+
+Save the final plan as your baseline
+document.
+
+Few‑Shot Prompting
+
+Module 4
+
+Why it exists:
+
+Teach the model a mapping by showing a few input→output
+examples. Useful when you need consistent labels/format.
+
+Core move:
+
+• Provide 2–5 examples
+
+• Keep prefixes consistent (Input:, Output:)
+
+• Then give a new input and let it continue the pattern
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Few‑Shot Prompting — Technical Example
+
+Module 4
+
+Example prompt (copy/paste)
+
+Task: classify bug report severity as {S1,S2,S3}.
+
+Input: “API down for all users, 500 errors”
+
+Output: S1
+
+Input: “One endpoint slow, workaround exists”
+
+Output: S2
+
+Input: “Minor UI glitch in settings page”
+
+Output: S3
+
+Input: “Vector DB query times out for most queries after
+deployment”
+
+Output:
+
+Sample output (what “good” looks like)
+
+Model continues: “S1” or “S2” depending on described
+impact.
+
+Key: format stays short and consistent.
+
+Mini‑task (do in class)
+
+Create a 3‑label classifier relevant to your FYP (e.g.,
+“Hallucination / Partial / Grounded”).
+
+Write 3 examples.
+
+Test on 5 new cases and see consistency.
+
+Few‑Shot for Actions
+
+Module 4
+
+Why it exists:
+
+Few‑shot can teach *what action to take* given a situation.
+Useful for tool‑using agents.
+
+Core move:
+
+• Use Situation: … / Action: … pairs
+
+• Keep actions as imperative verbs
+
+• Use it to generate more examples, then curate
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Few‑Shot for Actions — Technical Example
+
+Module 4
+
+Example prompt (copy/paste)
+
+You are an agent that chooses ONE tool.
+
+Situation: user asks “summarize this PDF”
+
+Action: use_tool(read_pdf)
+
+Situation: user asks “compare two answers”
+
+Action: use_tool(compare_outputs)
+
+Situation: user asks “find missing citation”
+
+Action: use_tool(web_search)
+
+Situation: user says “my results look wrong”
+
+Action:
+
+Sample output (what “good” looks like)
+
+Model continues with an action like:
+“use_tool(run_sanity_checks)” or
+“ask_clarifying_question”.
+
+Mini‑task (do in class)
+
+Define 6 tools your FYP assistant could call.
+
+Write 4 situation→action examples.
+
+Test: give 5 new situations; check if tool
+choice makes sense.
+
+Few‑Shot with Intermediate Steps
+
+Module 4
+
+Why it exists:
+
+Add Think/Action/Observation steps so the model learns a
+mini‑workflow, not just a label.
+
+Core move:
+
+• Show multi‑step traces
+
+• Keep each step on one line
+
+• Helps agents follow procedures
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Few‑Shot with Intermediate Steps — Technical Example
+
+Module 4
+
+Example prompt (copy/paste)
+
+Goal: answer with grounded citations.
+
+Situation: user asks “What does clause 4.2 allow?”
+
+Think: need to retrieve relevant clause text
+
+Action: retrieve(policy, query="clause 4.2")
+
+Observation: returns clause 4.2 text
+
+Think: extract allowable items + quote
+
+Action: write_answer_with_quotes()
+
+Observation: answer drafted with quotes + clause id
+
+Situation: user asks “Is Business Class reimbursable?”
+
+Think:
+
+Sample output (what “good” looks like)
+
+Model continues the chain: retrieve→quote→hedge
+interpretations→ask for human escalation if ambiguous.
+
+Mini‑task (do in class)
+
+Pick a recurring FYP workflow
+(retrieve→summarize→cite).
+
+Write 1 full trace example.
+
+Then give a new situation and see if model
+follows the trace pattern.
+
+Writing Effective Few‑Shot Examples
+
+Module 4
+
+Why it exists:
+
+Few‑shot fails when examples are ambiguous, prefixes are
+too generic, or new inputs lack required context.
+
+Core move:
+
+• Use descriptive prefixes (not just Input/Output)
+
+• Cover edge cases
+
+• Ensure new input contains enough info to decide
+
+Where it fits in FYPs
+
+Use it as a reusable *prompt primitive* inside
+your agent loop / RAG UI.
+
+Few‑Shot Quality Checklist
+
+Module 4
+
+1) If you gave the examples to 10 humans, would they agree on the mapping?
+
+2) Are the prefixes meaningful (e.g., ‘Object:’, ‘Constraint:’, ‘Expected label:’)?
+
+3) Are labels bounded (explicit set of allowed outputs)?
+
+4) Does each new input include the variables needed to choose a label?
+
+5) Did you include at least one tricky/edge case example?
+
+6) After generation, curate the examples and re‑use the curated set.
